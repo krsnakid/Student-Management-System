@@ -1,12 +1,45 @@
-# React + Vite
+# 🎓 Student Management System (React)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple and responsive web app built with **React** that allows users to manage student data — including adding, editing, viewing, and deleting students. This project demonstrates core React concepts like **state management**, **routing**, **props**, **conditional rendering**, **form validation**, and **API integration** using [MockAPI](https://mockapi.io).
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Features
 
-## Expanding the ESLint configuration
+- 🧑‍🎓 Add, view, edit, and delete student records  
+- ✅ Form validation (name, email, age, etc.)  
+- 🔁 Real-time CRUD operations using MockAPI  
+- ⚛️ React Router DOM for multi-page navigation  
+- 🧠 State management with React Hooks  
+- 📱 Fully responsive design (mobile + desktop)
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 📂 Pages / Routes
+
+- `/` – Home Page  
+- `/students` – List of all students  
+- `/students/:id` – View student details  
+- `/add-student` – Add a new student  
+- `/edit-student/:id` – Edit existing student info
+
+---
+
+## 🛠 Tech Stack
+
+- [React](https://reactjs.org/)
+- [React Router DOM](https://reactrouter.com/)
+- [Axios](https://axios-http.com/)
+- [MockAPI](https://mockapi.io/)
+- [Tailwind CSS](https://tailwindcss.com/) *(optional)*
+- HTML / CSS / JavaScript
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the repo
+
+```bash
+git clone https://github.com/krsnakid/student-management.git
+cd student-management
