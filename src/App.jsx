@@ -21,7 +21,12 @@ function App() {
 
     console.log(stdLis === null ? "Error : Unrecognised key" : "Data added")
 
-    
+  }
+
+  const deleteStudent = (val) => {
+    const newStdLis = studentList.filter((_, indx) => val !== indx)
+
+    setStudentList(newStdLis)
   }
 
   return (
@@ -29,7 +34,7 @@ function App() {
       <Navbar/>
       <Routes>
         <Route path="/" element={<Home/>} />
-        <Route path="/editStudents" element={<EditStudents stdLis={studentList} setStd={setStudent}/>} />
+        <Route path="/editStudents" element={<EditStudents stdLis={studentList} setStd={setStudent} delStd={deleteStudent}/>} />
       </Routes>
     </div>
   )
