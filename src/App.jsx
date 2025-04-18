@@ -4,6 +4,7 @@ import {Routes, Route} from "react-router-dom";
 import Navbar from "./components/Navbar"
 import Home from "./pages/Home";
 import EditStudents from "./pages/EditStudents";
+import StudentList from "./pages/StudentList";
 
 import useLocalStorage from "./utils/useLocalStorage";
 
@@ -33,8 +34,9 @@ function App() {
     <div className="app">
       <Navbar/>
       <Routes>
-        <Route path="/" element={<Home/>} />
+        <Route path="/" element={<Home studentCount={studentList.length} />} />
         <Route path="/editStudents" element={<EditStudents stdLis={studentList} setStd={setStudent} delStd={deleteStudent}/>} />
+        <Route path="/studentList" element={<StudentList stdLis={studentList} />} />
       </Routes>
     </div>
   )
