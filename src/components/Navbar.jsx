@@ -6,7 +6,7 @@ function Navbar(){
 
     return (
         <>
-           <div className="navbar flex h-13 bg-blue-900 justify-between items-center">
+           <div className="navbar flex h-16 bg-blue-900 justify-between items-center fixed top-0 left-0 w-full z-50">
             <h2 className="font-serif text-3xl ml-6 text-white font-medium ">
                 Student Management System
             </h2>
