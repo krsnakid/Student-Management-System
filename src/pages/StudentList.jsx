@@ -1,34 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useCallback, useMemo } from "react";
 import DisplayStudent from "../components/DisplayStudent";
+import { useStudentContext } from "../context/StudentContext";
 
-function StudentList({ stdLis }) {
-  const [inp, setInp] = useState("");
-  const [filteredList, setFilteredList] = useState([]);
+function StudentList() {
+  const { searchTerm, setSearchTerm, getFilteredStudents, studentCount } = useStudentContext();
   
-  useEffect(() => {
-    console.log("StudentList component mounted");
-    console.log("Student list received:", stdLis);
-    
-    // Initialize filtered list with all students
-    setFilteredList(stdLis || []);
-  }, [stdLis]);
+  const handleSearchChange = useCallback((e) => {
+    setSearchTerm(e.target.value);
+  }, [setSearchTerm]);
   
-  // Update filtered list when input changes
-  useEffect(() => {
-    if (inp === "") {
-      setFilteredList(stdLis || []);
-    } else {
-      const filtered = stdLis ? stdLis.filter(obj => 
-        obj.name && obj.name.toLowerCase().includes(inp.toLowerCase())
-      ) : [];
-      setFilteredList(filtered);
-    }
-  }, [inp, stdLis]);
-
-  // Create an array of DisplayStudent components
-  const displayStudents = filteredList.map((obj, indx) => (
-    <DisplayStudent key={indx} obj={obj} delStd={() => {}} />
-  ));
+  const filteredStudents = useMemo(() => getFilteredStudents(), [getFilteredStudents]);
+  
+  const displayStudents = useMemo(() => {
+    return filteredStudents.map((obj, indx) => (
+      <DisplayStudent key={indx} obj={obj} delStd={() => {}} />
+    ));
+  }, [filteredStudents]);
 
   return (
     <div className="w-full bg-gray-100 flex flex-col items-center p-4" style={{ marginTop: '4rem' }}>
@@ -40,14 +27,13 @@ function StudentList({ stdLis }) {
               type="text"
               placeholder="Search by Name"
               className="w-full p-2 focus:outline-none"
-              onChange={(e) => {
-                setInp(e.target.value);
-              }}
+              value={searchTerm}
+              onChange={handleSearchChange}
             />
           </div>
           <div>
             <span className="bg-blue-100 text-blue-800 px-4 py-2 rounded-full">
-              Total Students: {stdLis.length}
+              Total Students: {studentCount}
             </span>
           </div>
         </section>
@@ -55,7 +41,7 @@ function StudentList({ stdLis }) {
         <section className="bg-white shadow-md rounded-lg p-4">
           <h2 className="text-2xl font-semibold mb-4">Student Directory</h2>
           {displayStudents.length > 0 ? (
-            <div className="divide-y divide-gray-200">
+            <div className="space-y-2">
               {displayStudents}
             </div>
           ) : (

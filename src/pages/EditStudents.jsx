@@ -1,20 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useCallback, useMemo } from "react";
 import StudentForm from "../components/StudentForm";
 import DisplayStudent from "../components/DisplayStudent";
+import { useStudentContext } from "../context/StudentContext";
 
-function EditStudents({ stdLis, setStd, delStd }) {
+function EditStudents() {
+  const { searchTerm, setSearchTerm, addStudent, deleteStudent, getFilteredStudents } = useStudentContext();
   const [showAddForm, setShowAddForm] = useState(false);
-  const toggleShowAddForm = () => setShowAddForm((prev) => !prev);
-  const [inp, setInp] = useState("");
+  
+  const toggleShowAddForm = useCallback(() => {
+    setShowAddForm(prev => !prev);
+  }, []);
+  
+  const filteredStudents = useMemo(() => getFilteredStudents(), [getFilteredStudents]);
+  
+  const studentList = useMemo(() => {
+    return filteredStudents.map((obj, indx) => (
+      <DisplayStudent 
+        key={indx} 
+        obj={obj} 
+        delStd={() => deleteStudent(indx)} 
+      />
+    ));
+  }, [filteredStudents, deleteStudent]);
 
-  let studentList =
-    inp !== ""
-      ? stdLis.filter((obj) => obj["name"].toLowerCase().includes(inp))
-      : stdLis;
-
-  studentList = studentList.map((obj, indx) => (
-    <DisplayStudent key={indx} obj={obj} delStd={() => delStd(indx)} />
-  ));
+  const handleSearchChange = useCallback((e) => {
+    setSearchTerm(e.target.value);
+  }, [setSearchTerm]);
 
   return (
     <>
@@ -27,15 +38,14 @@ function EditStudents({ stdLis, setStd, delStd }) {
                 type="text"
                 placeholder="Search by Name"
                 className="w-full p-2 focus:outline-none"
-                onChange={(e) => {
-                  setInp(e.target.value);
-                }}
+                value={searchTerm}
+                onChange={handleSearchChange}
               />
             </div>
             <div className="flex gap-2">
               <button
                 className="bg-blue-600 text-white font-bold px-4 py-2 rounded hover:bg-blue-700 transition"
-                onClick={() => setShowAddForm(true)}
+                onClick={toggleShowAddForm}
               >
                 Add
               </button>
@@ -47,20 +57,21 @@ function EditStudents({ stdLis, setStd, delStd }) {
 
           <section className="bg-white shadow-md rounded-lg p-4">
             <h2 className="text-2xl font-semibold mb-4">Student List</h2>
-            <div className="divide-y divide-gray-200">
-              {studentList.map((student, index) => (
-                <div key={index} className="last:border-none">
-                  {student}
-                </div>
-              ))}
+            <div className="space-y-2">
+              {studentList.length > 0 ? (
+                studentList
+              ) : (
+                <p className="text-center py-4 text-gray-500">No students found. Add students using the Add button.</p>
+              )}
             </div>
           </section>
         </div>
       </div>
       {showAddForm && (
-        <StudentForm toggleFormStatus={toggleShowAddForm} setStudent={setStd} />
+        <StudentForm toggleFormStatus={toggleShowAddForm} setStudent={addStudent} />
       )}
     </>
   );
 }
+
 export default EditStudents;

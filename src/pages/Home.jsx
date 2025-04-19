@@ -1,7 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useStudentContext } from "../context/StudentContext";
 
-function Home({ studentCount }) {
+function Home() {
+  const { studentCount } = useStudentContext();
+  
   return (
     <div className="w-full h-screen flex flex-col items-center justify-center bg-gray-100">
       <h1 className="text-4xl font-bold mb-4 text-blue-900">Welcome to the Student Management System</h1>
@@ -24,6 +27,11 @@ function Home({ studentCount }) {
         >
           Learn More
         </a>
+      </div>
+      
+      <div className="absolute bottom-4 text-center text-gray-500 text-sm">
+        <p>© {new Date().getFullYear()} Student Management System. All rights reserved.</p>
+        <p className="mt-1 font-medium">Made with ❤️ by Ujjwal Sahu</p>
       </div>
     </div>
   );
