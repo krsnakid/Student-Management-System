@@ -20,8 +20,8 @@ function StudentList() {
   return (
     <div className="w-full bg-gray-100 flex flex-col items-center p-4" style={{ marginTop: '4rem' }}>
       <div className="w-full max-w-4xl">
-        <section className="flex justify-between items-center mb-4">
-          <div className="flex items-center bg-white shadow-md rounded-lg overflow-hidden w-full max-w-md">
+        <section className="flex flex-col sm:flex-row gap-3 sm:gap-0 sm:justify-between sm:items-center mb-4">
+          <div className="flex items-center bg-white shadow-md rounded-lg overflow-hidden w-full sm:max-w-md">
             <i className="fa-solid fa-magnifying-glass text-gray-500 px-3"></i>
             <input
               type="text"
@@ -31,8 +31,8 @@ function StudentList() {
               onChange={handleSearchChange}
             />
           </div>
-          <div>
-            <span className="bg-blue-100 text-blue-800 px-4 py-2 rounded-full">
+          <div className="mt-2 sm:mt-0">
+            <span className="bg-blue-100 text-blue-800 px-4 py-2 rounded-full inline-block w-full text-center sm:w-auto">
               Total Students: {studentCount}
             </span>
           </div>
