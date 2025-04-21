@@ -28,7 +28,7 @@ function StudentForm({toggleFormStatus, setStudent}) {
             <div className='bg-white p-3 sm:p-6 rounded-lg w-full max-w-[500px] max-h-[95vh] overflow-y-auto mt-16 sm:mt-0'>
                 <h2 className='text-xl sm:text-2xl font-bold mb-3'>Add New Student</h2>
                 <form action="" onSubmit={handleSubmit} className="overflow-y-auto">
-                    <div className="grid grid-cols-1 gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <div className="mb-2">
                             <label htmlFor="stdN" className='block text-gray-700 mb-1 text-sm sm:text-base'>Student Name</label>
                             <input 
@@ -80,7 +80,7 @@ function StudentForm({toggleFormStatus, setStudent}) {
                             </select>
                         </div>
 
-                        <div className="mb-2">
+                        <div className="mb-2 col-span-1 sm:col-span-2">
                             <label htmlFor="address" className='block text-gray-700 mb-1 text-sm sm:text-base'>Address</label>
                             <textarea 
                                 name="address"
